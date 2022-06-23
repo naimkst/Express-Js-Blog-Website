@@ -1,11 +1,16 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var multer = require("multer");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 // var multer = multer();
 
 app = express();
 app.use(bodyParser.json());
+
+// app.use(function(req, res, next){
+//   console.log('Inn....');
+//   next();
+// });
 // app.use(multer.array());
 // app.use(express.static("public"));
 
@@ -28,22 +33,26 @@ const storage = multer.diskStorage({
     callBack(null, "./uploads");
   },
   filename: function (req, file, callBack) {
-    const fileName = uuidv4() + file.originalname.replace(/\s/g, '');
+    const fileName = uuidv4() + file.originalname.replace(/\s/g, "");
     callBack(null, fileName);
   },
-
 });
 
 var upload = multer({ storage: storage }).single("myfile");
 app.post("/post", function (req, res) {
-  upload(req, res, function(error){
+  upload(req, res, function (error) {
     const imageName = req.file.originalname;
-    if(error){
+    if (error) {
       res.send("File Upload Field");
-    }else{
+    } else {
       res.send("File upload success");
     }
   });
+});
+
+app.get("/gurd", function (req, res, next) {
+  next();
+  res.send("Gurd Call!");
 });
 
 app.listen(8000, function () {
