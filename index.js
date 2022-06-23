@@ -2,10 +2,22 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 // var multer = multer();
 
+dotenv.config();
 app = express();
 app.use(bodyParser.json());
+
+//Database connection
+mongoose
+  .connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(console.log("Database Connected"))
+  .catch((error) => console.log(error));
 
 // app.use(function(req, res, next){
 //   console.log('Inn....');
