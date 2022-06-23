@@ -32,7 +32,7 @@ router.post("/login", async (req, res) => {
         user.password
       );
       !checkPassword && res.status(400).json("Wrong credentials!");
-      const { password, ...userData } = user._doc; 
+      const { password, ...userData } = user._doc;
       res.status(200).json(userData);
     }
   } catch (error) {
