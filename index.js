@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const authRoute = require("./route/auth");
 const userRoute = require("./route/users");
+const postRoute = require("./route/posts");
 // var multer = multer();
 
 dotenv.config();
@@ -72,6 +73,7 @@ mongoose
 
 app.use("/api", authRoute);
 app.use("/api", userRoute);
+app.use("/api", postRoute);
 
 app.listen(8000, function () {
   console.log(`Server run with port: 8000`);

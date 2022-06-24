@@ -12,7 +12,7 @@ const PostSchema = new mongoose.Schema(
     },
     thumbnail: {
       type: String,
-      require: flase,
+      require: false,
     },
     userName: {
       type: String,
