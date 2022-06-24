@@ -27,5 +27,30 @@ router.put("/user/:id", async (req, res) => {
 });
 
 //Delete
+router.delete('/user/:id', async (req, res) => {
+  console.log(req.body.userId, req.params.id);
+  if(req.body.userId == req.params.id){
+    try {
+      const deleteUser = await User.findByIdAndDelete(req.params.id);
+      res.status(200).json(deleteUser);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }else{
+    res.status(400).json("Oppss something is wrong!");
+  }
+});
+
+//Get User By ID
+router.get('/user/:id', async (req, res) => {
+  try {
+    const getUser = await User.findById(req.params.id);
+    const { password, ...withoutPassword } = getUser._doc;
+    res.status(200).json(withoutPassword);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
 
 module.exports = router;
