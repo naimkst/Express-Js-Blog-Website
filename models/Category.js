@@ -8,7 +8,7 @@ const CategorySchema = new mongoose.Schema(
     },
     thumbnail: {
       type: String,
-      require: flase,
+      require: false,
     },
   },
   { timestamps: true }
