@@ -47,4 +47,24 @@ router.get("/post/:id", async (req, res) => {
   }
 });
 
+//Get all Post
+router.get("/posts", async (req, res) => {
+  const cat = req.query.cat;
+  try {
+    let posts;
+    if (cat) {
+      posts = await Post.find({
+        categories: {
+          $in: [cat],
+        },
+      });
+    } else {
+      posts = await Post.find();
+    }
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(200).json(error);
+  }
+});
+
 module.exports = router;
